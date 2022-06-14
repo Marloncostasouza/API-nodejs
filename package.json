@@ -1,0 +1,19 @@
+{
+  "name": "api-code-books",
+  "version": "1.0.0",
+  "description": "API para CRUD da entidade books",
+  "main": "src/server.js",
+  "scripts": {
+  "start":"node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "3.3.7",
+    "fastify": "4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.16"
+  }
+}
