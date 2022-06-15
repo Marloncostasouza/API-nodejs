@@ -11,8 +11,8 @@ const starServer = async () => {
     }
 };
 
-fastify.get("/", (req, reply) => {
-    reply.send("Hello world")
-});
+fastify.register(require("./routes/books"));
+
+
 
 starServer();
