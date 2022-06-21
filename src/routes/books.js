@@ -1,5 +1,5 @@
-const {getBookSchemas, getBooksSchemas} = require("../controllers/schemas/books");
-const {getBookHandler, getBooksHandler} = require("../controllers/handlers/books");
+const {getBookSchemas, getBooksSchemas, updateBookSchema,} = require("../controllers/schemas/books");
+const {getBookHandler, getBooksHandler, updateBookHandler,} = require("../controllers/handlers/books");
 
 const getBookOpts = {
     schema: getBookSchemas,
@@ -12,10 +12,15 @@ const getBooksOpts = {
     handler: getBooksHandler,
 };
 
+const updateBooksOpts = {
+    schema: updateBookSchema,
+    handler: updateBookHandler,
+};
 
 const bookRoutes = (fastify, options, done) => {
     fastify.get("/api/books", getBooksOpts);
     fastify.get("/api/books/:id", getBookOpts );
+    fastify.put("/api/books/edit/:id", updateBooksOpts);
 
     done();
 };
