@@ -51,4 +51,30 @@ const getBooksSchemas = {
         },
     };
 
-    module.exports = { getBookSchemas, getBooksSchemas, updateBookSchema };
+    const addBookSchemas = {
+        body: {
+            type: "object",
+            required: ["title", "gender"],
+            properties: {
+                title: typeString,
+                gender: typeString,
+            },
+
+        },
+        response: {
+            200: typeString
+        },
+    };
+
+    const deleteBookSchema = {
+        params: {
+            id: typeNumber
+        },
+        response: {
+            200: typeString
+        },
+
+    };
+ 
+
+    module.exports = { getBookSchemas, getBooksSchemas, updateBookSchema , addBookSchemas, deleteBookSchema,};

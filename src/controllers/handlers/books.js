@@ -1,7 +1,7 @@
 const books = require("../../cloud/books");
 
 const getBooksHandler =  (req, reply) => {
-    reply.send(books);
+    return reply.send(books);
    };
 
    const getBookHandler = (req , reply) => {
@@ -10,10 +10,10 @@ const getBooksHandler =  (req, reply) => {
     const book = books.find((book) => book.id === id );
 
     if (book){
-        reply.send(book);
+      return  reply.send(book);
     }
 
-    reply.status(404).send(new Error("Book not found"));
+   return reply.status(404).send(new Error("Book not found"));
    };
 
    const updateBookHandler = (req, reply) => {
@@ -24,14 +24,40 @@ const getBooksHandler =  (req, reply) => {
     if(book){
         book.title = title
         book.gender = gender
-        reply.send(" Book update!");
+      return  reply.send(" Book update!");
     }
 
-    reply.status(404).send(new Error("Book not found"));
+    return reply.status(404).send(new Error("Book not found"));
+   };
+
+   const addBookHandler = (req, reply) => {
+    const {title, gender} = req.body;
+
+    const id = books.length + 1;
+    books.push({title, gender,id});
+
+   return reply.send("Book added!");
+   };
+
+  
+   const deleteBookHandler = (req, reply) => {
+    const {id} = req.params;
+
+    const bookIndex = books.findIndex((book)=> book.id === id);
+    if (bookIndex === -1) {
+      return  reply.status(404).send(new Error("Books not found!"));
+
+    }
+
+    books.splice(bookIndex, 1);
+
+    reply.send("Book was Deleted!")
    };
 
    module.exports ={
     getBookHandler,
     getBooksHandler,
     updateBookHandler,
+    addBookHandler,
+    deleteBookHandler,
    }
